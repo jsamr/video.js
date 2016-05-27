@@ -36,10 +36,13 @@ class MouseTimeDisplay extends Component {
     }
 
     this.update(0, 0);
-
-    player.on('ready', () => {
-      this.on(player.controlBar.progressControl.el(), 'mousemove', throttle(Fn.bind(this, this.handleMouseMove), 25));
-    });
+    
+    if (player.controlBar &&
+        player.controlBar.progressControl) {
+      player.on('ready', () => {
+        this.on(player.controlBar.progressControl.el(), 'mousemove', throttle(Fn.bind(this, this.handleMouseMove), 25));
+      }); 
+    }
   }
 
   /**
